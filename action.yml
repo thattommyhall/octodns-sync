@@ -13,13 +13,21 @@ inputs:
                   not do it.'
     required: false
     default: ''
+  plan_checksum:
+    description: The checksum to test the plan against before applying
+outputs:
+  result:
+    description: The result of running the command
+  plan_checksum:
+    description: The checksum of the plan
 
 runs:
   using: 'docker'
-  image: 'docker://solvaholic/octodns-sync:2.0.0'
+  image: 'docker://thattommyhall/octodns-sync:add-plan-checksum'
   args:
     - ${{ inputs.config_path }}
     - ${{ inputs.doit }}
+    - ${{ inputs.plan_checksum }}
 
 branding:
   icon: 'list'
